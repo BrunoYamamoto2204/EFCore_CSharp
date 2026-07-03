@@ -10,11 +10,6 @@ builder.Services.AddDbContext<Context>(options =>
     options.UseSqlite(builder.Configuration["ConnectionStrings:FuscaFilmesStr"])
 );
 
-//using (var context = new Context())
-//{
-//    context.Database.EnsureCreated();
-//}
-
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
@@ -34,12 +29,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
-app.MapGet("/createDB", (Context context) =>
-{
-    context.Database.EnsureCreated();
-});
 
 // ------------------------------ GET ------------------------------ 
 app.MapGet("/diretores", (Context context) =>
