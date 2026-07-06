@@ -7,5 +7,5 @@ public class Filme
     public int Ano { get; set; }
 
     public int DiretorId { get; set; }
-    public required Diretor Diretor { get; set; }
+    public Diretor Diretor { get; set; } = null!;
 }
