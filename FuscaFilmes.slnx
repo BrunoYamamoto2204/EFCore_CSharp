@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="FuscaFilmes/FuscaFilmes.csproj" />
+  <Project Path="FuscaFilmes.Domain/FuscaFilmes.Domain.csproj" Id="80c8345d-be8a-48d8-b019-82af23c66529" />
+  <Project Path="FuscaFilmes/FuscaFilmes.API.csproj" />
+  <Project Path="Repositorio/FuscaFilmes.Repo.csproj" Id="665d3673-1654-4170-bfcc-8a156cb9bd05" />
 </Solution>

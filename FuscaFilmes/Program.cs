@@ -1,17 +1,20 @@
-using FuscaFilmes.DbContexts;
-using FuscaFilmes.Entities;
+using FuscaFilmes.EndpointHandlers;
+using FuscaFilmes.Repo.Contexts;
+using FuscaFilmes.Repo.Contratos;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using FuscaFilmes.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<Context>(options =>
-    options.UseSqlite(builder.Configuration["ConnectionStrings:FuscaFilmesStr"])
+builder.Services.AddDbContext<Context>(options => options
+    .UseSqlite(builder.Configuration["ConnectionStrings:FuscaFilmesStr"])
+    .LogTo(Console.WriteLine, LogLevel.Information)
 );
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddScoped<IDirectorRepository, DiretorRepository>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -30,49 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// ------------------------------ GET ------------------------------ 
-app.MapGet("/diretores", (Context context) =>
-{
-    return context.Diretores.Include(x => x.Filmes).ToList();
-});
-
-// ------------------------------ POST ------------------------------ 
-app.MapPost("/diretores", (Context context, Diretor diretor) =>
-{
-    context.Diretores.Add(diretor);
-    context.SaveChanges();
-});
-
-// ------------------------------ PUT ------------------------------ 
-app.MapPut("/diretores/{diretorId}", (Context context, int diretorId, Diretor diretorNovo) =>
-{
-    var diretor = context.Diretores.Find(diretorId);
-
-    if (diretor != null)
-    {
-        diretor.Name = diretorNovo.Name;
-        if (diretorNovo.Filmes.Count > 0)
-        {
-            diretor.Filmes.Clear();
-            foreach (var filme in diretorNovo.Filmes)
-            {
-                diretor.Filmes.Add(filme);
-            }
-        }
-    }
-
-    context.SaveChanges();
-});
-
-// ------------------------------ DELETE ------------------------------ 
-app.MapDelete("/diretores/{diretorId}", (Context context, int diretorId) =>
-{
-    var diretor = context.Diretores.Find(diretorId);
-
-    if (diretor != null) context.Diretores.Remove(diretor);
-
-    context.SaveChanges();
-});
+// Método DiretoresEndopoints() é extensão de app
+app.DiretoresEndopoints();  
+app.FilmesEndopoints();
 
 app.Run();
-
