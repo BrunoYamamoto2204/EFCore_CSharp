@@ -19,15 +19,12 @@ public static class EndpointFilmes
         app.MapGet("filmesLinQ/filmes/byName/{titulo}", FilmesHandlers.GetFilmesContainsByTitulo);
 
         // ------------------------------ FILME - DELETE ------------------------------ 
-        app.MapDelete("/filmes/{filmeId}", FilmesHandlers.ExecuteDeleteFilme);
+        app.MapDelete("/filmes/{filmeId}", FilmesHandlers.DeleteFilme);
 
-        // ------------------------------ FILME - PATCH (SaveChanges) ------------------------------ 
+        // ------------------------------ FILME - PATCH ------------------------------ 
         app.MapPatch("/filmesUpdate", FilmesHandlers.UpdateFilme);
 
-        // ------------------------------ FILME - PATCH (ExecuteUpdate) ------------------------------ 
-        app.MapPatch("/filmesExecuteUpdate", FilmesHandlers.ExecuteUpdateFilme);
-
         // ------------------------------ FILME - POST ------------------------------ 
-        app.MapPost("filmes", FilmesHandlers.CreateFilme);
+        app.MapPost("filmes", FilmesHandlers.AddFilme);
     }
 }

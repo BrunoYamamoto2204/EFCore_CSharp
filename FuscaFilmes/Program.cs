@@ -14,6 +14,7 @@ builder.Services.AddDbContext<Context>(options => options
 );
 
 builder.Services.AddScoped<IDirectorRepository, DiretorRepository>();
+builder.Services.AddScoped<IFilmeRepository, FilmeRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
