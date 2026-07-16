@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FuscaFilmes.Repo.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20260708010419_InitialCreation")]
-    partial class InitialCreation
+    [Migration("20260709182956_RebuildDB")]
+    partial class RebuildDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

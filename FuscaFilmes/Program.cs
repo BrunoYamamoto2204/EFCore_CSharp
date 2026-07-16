@@ -1,10 +1,11 @@
 using FuscaFilmes.EndpointHandlers;
+using FuscaFilmes.Repo;
 using FuscaFilmes.Repo.Contexts;
 using FuscaFilmes.Repo.Contratos;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.Text.Json.Serialization;
-using FuscaFilmes.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<Context>(options => options
 
 builder.Services.AddScoped<IDirectorRepository, DiretorRepository>();
 builder.Services.AddScoped<IFilmeRepository, FilmeRepository>();
+builder.Services.AddScoped<IDirectorRepository, DiretorRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

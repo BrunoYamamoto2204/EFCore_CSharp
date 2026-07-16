@@ -13,7 +13,7 @@ public class FilmeRepository(Context _context) : IFilmeRepository
     public List<Filme> GetFilmes()
     {
         return Context.Filmes
-                .Include(x => x.Diretor)
+                .Include(x => x.Diretores)
                 .OrderByDescending(x => x.Ano)
                 .OrderByDescending(X => X.Titulo)
                 .ToList();
@@ -23,7 +23,7 @@ public class FilmeRepository(Context _context) : IFilmeRepository
     {
         return Context.Filmes
                 .Where(x => x.Id == id)
-                .Include(x => x.Diretor)
+                .Include(x => x.Diretores)
                 .ToList();
     }
 
@@ -31,7 +31,7 @@ public class FilmeRepository(Context _context) : IFilmeRepository
     {
         return Context.Filmes
                 .Where(x => EF.Functions.Like(x.Titulo, $"%{titulo}%"))
-                .Include(x => x.Diretor)
+                .Include(x => x.Diretores)
                 .ToList();
     }
 
@@ -39,7 +39,7 @@ public class FilmeRepository(Context _context) : IFilmeRepository
     {
         return Context.Filmes
             .Where(x => x.Titulo.Contains(titulo))
-            .Include(x => x.Diretor)
+            .Include(x => x.Diretores)
             .ToList();
     }
 

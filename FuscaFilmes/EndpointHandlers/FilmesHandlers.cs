@@ -1,5 +1,4 @@
-﻿using FuscaFilmes.DbContexts;
-using FuscaFilmes.Domain.Entities;
+﻿using FuscaFilmes.Domain.Entities;
 using FuscaFilmes.Domain.Models;
 using FuscaFilmes.Repo.Contexts;
 using FuscaFilmes.Repo.Contratos;
