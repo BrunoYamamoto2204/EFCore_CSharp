@@ -22,10 +22,10 @@ namespace FuscaFilmes.Repo
                 .ExecuteDelete<DiretorDetalhe>();
         }
 
-        public List<DiretorDetalhe> GetDiretorDetalhes()
+        public List<DiretorDetalhe> Get()
         {
             return Context.DiretorDetalhe
-                .Include(x => x.Diretor.Name)
+                .Include(x => x.Diretor)
                 .ToList();
         }
 

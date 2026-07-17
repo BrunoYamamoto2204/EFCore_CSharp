@@ -17,5 +17,4 @@ public interface IDirectorRepository
     void Delete(int diretor);
 
     bool SaveChanges();
-    void Update(DiretorDetalhe diretorDetalhe);
 }

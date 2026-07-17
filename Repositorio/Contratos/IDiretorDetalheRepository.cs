@@ -9,7 +9,7 @@ namespace FuscaFilmes.Repo.Contratos
 {
     public interface IDiretorDetalheRepository
     {   
-        List<DiretorDetalhe> GetDiretorDetalhes();
+        List<DiretorDetalhe> Get();
 
         void Add(DiretorDetalhe diretorDetalhe);
 

@@ -8,7 +8,7 @@ namespace FuscaFilmes.API.EndpointHandlers
     {
         public static List<DiretorDetalhe> GetDiretorDetalhes(IDiretorDetalheRepository diretorDetalheRepository)
         {
-            return diretorDetalheRepository.GetDiretorDetalhes();
+            return diretorDetalheRepository.Get();
         }
 
         public static void AddDiretorDetalhe(IDiretorDetalheRepository diretorDetalheRepository, DiretorDetalhe diretorDetalhe)
