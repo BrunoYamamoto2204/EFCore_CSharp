@@ -6,20 +6,20 @@ namespace FuscaFilmes.Repo.Contratos;
 
 public interface IFilmeRepository
 {
-    List<Filme> GetFilmes();
+    Task<List<Filme>> GetFilmesAsync();
 
-    List<Filme> GetFilmeById(int id);
+    Task<List<Filme>> GetFilmeByIdAsync(int id);
 
-    List<Filme> GetFilmeEFFunctionByTitulo(string titulo);
+    Task<List<Filme>> GetFilmeEFFunctionByTituloAsync(string titulo);
 
-    List<Filme> GetFilmesContainsByTitulo(string titulo);
+    Task<List<Filme>> GetFilmesContainsByTituloAsync(string titulo);
 
-    void Add(Filme filme);
+    Task AddAsync(Filme filme);
 
-    void Update(FilmeUpdate filmeUpdate);
+    Task UpdateAsync(FilmeUpdate filmeUpdate);
 
-    void Delete(int filmeId);
+    Task DeleteAsync(int filmeId);
 
-    bool SaveChanges();
+    Task<bool> SaveChangesAsync();
 }
 

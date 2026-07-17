@@ -1,3 +1,4 @@
+using FuscaFilmes.API.EndpointExtensions;
 using FuscaFilmes.EndpointHandlers;
 using FuscaFilmes.Repo;
 using FuscaFilmes.Repo.Contexts;
@@ -16,7 +17,7 @@ builder.Services.AddDbContext<Context>(options => options
 
 builder.Services.AddScoped<IDirectorRepository, DiretorRepository>();
 builder.Services.AddScoped<IFilmeRepository, FilmeRepository>();
-builder.Services.AddScoped<IDirectorRepository, DiretorRepository>();
+builder.Services.AddScoped<IDiretorDetalheRepository, DiretorDetalheRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,5 +40,6 @@ if (app.Environment.IsDevelopment())
 // Método DiretoresEndopoints() é extensão de app
 app.DiretoresEndopoints();  
 app.FilmesEndopoints();
+app.DiretorDetalheEndpoint();
 
 app.Run();

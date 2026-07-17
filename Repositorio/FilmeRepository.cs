@@ -3,6 +3,7 @@ using FuscaFilmes.Domain.Models;
 using FuscaFilmes.Repo.Contexts;
 using FuscaFilmes.Repo.Contratos;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace FuscaFilmes.Repo;
 
@@ -10,47 +11,47 @@ public class FilmeRepository(Context _context) : IFilmeRepository
 {
     public Context Context = _context;
 
-    public List<Filme> GetFilmes()
+    public async Task<List<Filme>> GetFilmesAsync()
     {
-        return Context.Filmes
+        return await Context.Filmes
                 .Include(x => x.Diretores)
                 .OrderByDescending(x => x.Ano)
                 .OrderByDescending(X => X.Titulo)
-                .ToList();
+                .ToListAsync();
     }
 
-    public List<Filme> GetFilmeById(int id)
+    public async Task<List<Filme>> GetFilmeByIdAsync(int id)
     {
-        return Context.Filmes
+        return await Context.Filmes
                 .Where(x => x.Id == id)
                 .Include(x => x.Diretores)
-                .ToList();
+                .ToListAsync();
     }
 
-    public List<Filme> GetFilmeEFFunctionByTitulo(string titulo)
+    public async Task<List<Filme>> GetFilmeEFFunctionByTituloAsync(string titulo)
     {
-        return Context.Filmes
+        return await Context.Filmes
                 .Where(x => EF.Functions.Like(x.Titulo, $"%{titulo}%"))
                 .Include(x => x.Diretores)
-                .ToList();
+                .ToListAsync();
     }
 
-    public List<Filme> GetFilmesContainsByTitulo(string titulo)
+    public async Task<List<Filme>> GetFilmesContainsByTituloAsync(string titulo)
     {
-        return Context.Filmes
+        return await Context.Filmes
             .Where(x => x.Titulo.Contains(titulo))
             .Include(x => x.Diretores)
-            .ToList();
+            .ToListAsync();
     }
 
-    public void Add(Filme filme)
+    public async Task AddAsync(Filme filme)
     {
-        Context.Filmes.Add(filme);
+        await Context.Filmes.AddAsync(filme);
     }
 
-    public void Update(FilmeUpdate filmeUpdate)
+    public async Task UpdateAsync(FilmeUpdate filmeUpdate)
     {
-        var filme = Context.Filmes.Find(filmeUpdate.Id);
+        var filme = await Context.Filmes.FindAsync(filmeUpdate.Id);
 
         if (filme != null)
         {
@@ -61,15 +62,15 @@ public class FilmeRepository(Context _context) : IFilmeRepository
         }
     }
 
-    public void Delete(int filmeId)
+    public async Task DeleteAsync(int filmeId)
     {
-        Context.Filmes
+        await Context.Filmes
             .Where(x => x.Id == filmeId)
-            .ExecuteDelete<Filme>();
+            .ExecuteDeleteAsync<Filme>();
     }
 
-    public bool SaveChanges()
+    public async Task<bool> SaveChangesAsync()
     {
-        return Context.SaveChanges() > 0;
+        return (await Context.SaveChangesAsync()) > 0;
     }
 }
